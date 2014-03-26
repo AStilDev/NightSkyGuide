@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">NightSkyGuide_v1.0</string>
+
+    <string name="app_name">ConstDemo</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="content">image</string>
+    <string name="Constname">Constellation name</string>
+    <string name="location">Location</string>
+    <string name="details">Details</string>
+    <string name="title_activity_location">Location</string>
+    <string name="title_activity_lat_long_location">LatLongLocation</string>
+    <string name="title_activity_data_base">DataBaseActivity</string>
+    <string name="title_activity_web_view">WebViewActivity</string>
+
 </resources>

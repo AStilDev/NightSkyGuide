@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".DataBaseActivity"
+    android:background="@drawable/starry_night_sky" >
+
+    <!-- this will be the name -->
+    <TextView
+        android:id="@+id/constName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:text="@string/hello_world"
+        android:textColor="@color/light_blue" />
+    
+    <!-- abbreviation -->
+    
+    <!-- symbol -->
+    
+    <!-- family -->
+    
+    <!-- closest star -->
+    
+    <!-- wikilink -->
+
+	<TextView
+	    android:id="@+id/constLink"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:autoLink="web"
+	    android:layout_alignLeft="@+id/constName"
+	    android:layout_below="@+id/constName"
+	    android:layout_marginTop="34dp"
+	    android:textSize="22sp"
+	    android:text="@string/hello_world"
+	    android:textColor="@color/light_blue" />
+
+	<TextView
+	    android:id="@+id/constStar"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/constLink"
+	    android:layout_below="@+id/constLink"
+	    android:layout_marginTop="30dp"
+	    android:textSize="22sp"
+	    android:text="@string/hello_world"
+	    android:textColor="@color/light_blue" />
+
+	<TextView
+	    android:id="@+id/constFamily"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/constStar"
+	    android:layout_below="@+id/constStar"
+	    android:layout_marginTop="26dp"
+	    android:textSize="22sp"
+	    android:text="@string/hello_world"
+	    android:textColor="@color/light_blue" />
+
+	<TextView
+	    android:id="@+id/constSymbol"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/constFamily"
+	    android:layout_below="@+id/constFamily"
+	    android:layout_marginTop="27dp"
+	    android:textSize="22sp"
+	    android:text="@string/hello_world" 
+	    android:textColor="@color/light_blue" />
+
+	<TextView
+	    android:id="@+id/constAbb"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/constSymbol"
+	    android:layout_below="@+id/constSymbol"
+	    android:layout_marginTop="22dp"
+	    android:textSize="22sp"
+	    android:text="@string/hello_world"
+	    android:textColor="@color/light_blue" />
+
+	<Button
+	    android:id="@+id/WebLink"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/constAbb"
+	    android:layout_centerHorizontal="true"
+	    android:text="Wikipedia" />
+
+</RelativeLayout>
