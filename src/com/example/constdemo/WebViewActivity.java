@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class WebViewActivity extends Activity {
 	private WebView mWebView;
@@ -14,9 +15,17 @@ public class WebViewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_web_view);
 		
+		/* This is so url is loaded in app rather than calling external browser */
+		WebViewClient yourWebClient = new WebViewClient() {
+			// override page so it loads my view only
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				return false;
+			}
+		};
 		mWebView = (WebView) findViewById(R.id.webView1);
 		// Stop local links and redirects from opening in browser instead of WebView
-		mWebView.setWebViewClient(new MyAppWebViewClient());
+		mWebView.setWebViewClient(yourWebClient);
 		
 		Intent intent = getIntent();
 		String link = intent.getStringExtra("url");
@@ -25,16 +34,7 @@ public class WebViewActivity extends Activity {
 		WebSettings webSettings = mWebView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 		// Stop local links and redirects from opening in browser instead of WebView
-		//mWebView.setWebViewClient(new MyAppWebViewClient());
-		
 		mWebView.loadUrl(link);
 	}
-
-	//@Override
-	//public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.web_view, menu);
-		//return true;
-	//}
 
 }

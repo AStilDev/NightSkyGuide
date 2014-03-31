@@ -1,8 +1,5 @@
 package com.example.constdemo;
 
-
-
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -102,7 +99,6 @@ public class MainActivity extends Activity {
 			    	////////////// run gps and date functions store in array //////////
 				    	
 			    	Intent intent = new Intent(MainActivity.this, LatLongLocation.class);
-		    		//intent.putExtra("time", dateTime ); //Optional parameters
 				    startActivity(intent);
 			    }
 		  });
@@ -134,22 +130,16 @@ public class MainActivity extends Activity {
 					@Override
 	                public void onItemClick(AdapterView<?> parent, View view,
 	                                        int position, long id) {
-	                    	                    
 	                    // set up things to refresh with new information(selected image displayed
-	                	targetConst = constList[+ position]; // update this for call to database in view
-	                	
+	                	targetConst = constList[+ position]; // update this for call to database in view  	
 	                    newConst = constList[+ position].replaceAll(" ", "_").toLowerCase();
-	                    //Toast.makeText(MainActivity.this, "New constelation displayed will be " + newConst, Toast.LENGTH_SHORT).show();
-	                    
+	              
 	                    // redisplay image
 	                    img = (ImageView) findViewById(R.id.imageView1);
 	                    int imageId = getResources().getIdentifier(newConst, "drawable", getPackageName());
-	                    
 	                    img.setAlpha(130); //value: [0-255]. Where 0 is fully transparent and 255 is fully opaque
-	                    img.setImageResource(imageId);
-	                    
+	                    img.setImageResource(imageId);                 
 	                }
 	            });
 	  }
-	
 }
