@@ -5,6 +5,7 @@ import java.util.ArrayList;
 /* Use for location queries. */
 public class Location {
 
+    private int id;
     private int minLat;
     private int maxLat;
     private ArrayList<Constellation> constellations;
@@ -14,6 +15,11 @@ public class Location {
         minLat = min;
         maxLat = max;
         constellations = list;
+    }
+
+    public int getId()
+    {
+        return id;
     }
 
     public int getMinLat()
@@ -29,6 +35,11 @@ public class Location {
     public ArrayList<Constellation> getConstellations()
     {
         return constellations;
+    }
+
+    public void setId(int data)
+    {
+        id = data;
     }
 
     public void setMinLat(int min)
