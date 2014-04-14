@@ -39,6 +39,8 @@ public class Location {
         return constellation;
     }
 
+    public String getVis_period() { return vis_period; }
+
     public void setId(int data)
     {
         id = data;
@@ -54,8 +56,13 @@ public class Location {
         maxLat = max;
     }
 
-    public void setConstellations(ArrayList<Constellation> list)
+    public void setConstellation(String constel)
     {
-        constellations = list;
+        constellation = constel;
+    }
+
+    public void setVis_period(String vis)
+    {
+        vis_period = vis;
     }
 }

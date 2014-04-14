@@ -23,13 +23,13 @@ public class SQLiteLocation extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // SQL statement to create book table
+        // SQL statement to create location table
         String CREATE_LOCATION_TABLE = "CREATE TABLE location ( " +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "title TEXT, "+
                 "author TEXT )";
 
-        // create books table
+        // create location table
         db.execSQL(CREATE_LOCATION_TABLE);
     }
 
@@ -103,8 +103,8 @@ public class SQLiteLocation extends SQLiteOpenHelper {
             cursor.moveToFirst();
 
         // 4. build book object
-        Location location = new Location(cursor.getInt(1), cursor.getInt(2),
-                null); // TODO: set null to get the BLOB/BYTES
+        Location location = new Location(cursor.getInt(1), cursor.getInt(2), cursor.getString(3),
+                cursor.getString(4));
         //location.setId(Integer.parseInt(cursor.getString(0)));
 
         //Log.d("getBook("+id+")", constellation.toString());
@@ -128,8 +128,8 @@ public class SQLiteLocation extends SQLiteOpenHelper {
         Location location = null;
         if (cursor.moveToFirst()) {
             do {
-                location = new Location(cursor.getInt(1), cursor.getInt(2),
-                        null); // TODO: make last one arraylist/blob
+                location = new Location(cursor.getInt(1), cursor.getInt(2), cursor.getString(3),
+                        cursor.getString(4));
 
                 // Add location to locations
                 locations.add(location);
