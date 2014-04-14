@@ -8,13 +8,15 @@ public class Location {
     private int id;
     private int minLat;
     private int maxLat;
-    private ArrayList<Constellation> constellations;
+    private String constellation;
+    private String vis_period;
 
-    public Location (int min, int max, ArrayList<Constellation> list)
+    public Location (int min, int max, String constel, String vis)
     {
         minLat = min;
         maxLat = max;
-        constellations = list;
+        constellation = constel;
+        vis_period = vis;
     }
 
     public int getId()
@@ -32,9 +34,9 @@ public class Location {
         return maxLat;
     }
 
-    public ArrayList<Constellation> getConstellations()
+    public String getConstellation()
     {
-        return constellations;
+        return constellation;
     }
 
     public void setId(int data)
