@@ -21,40 +21,56 @@ import android.util.Log;
  * This class is basically a hack that lets us load a premade sqlite
  * database into the the application. It came from this site.
  * http://www.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/
- * @author Juan-Manuel Flux
- * @modifications Nick Wilson
+ * @author Juan-Manuel Fluxà
+ * @modifications Nick Wilson, Alisha Hayman
  *
  */
 public class DataBaseHelper extends SQLiteOpenHelper{
-	//The Android's default system path of your application database.
-	//private static String DB_PATH = "/data/data/packagename/databases/";
-	private static String DB_PATH; // = context.getApplicationInfo().dataDir + "/databases/";
-	//Data Base Name.
+	/* This will be Android's default system path of database */
+	private static String DB_PATH;
+	
+	/* Data Base Name */
 	private static final String DATABASE_NAME = "constellationdb.sqlite";
-	//Data Base Version.
+	
+	/*Data Base Version */
 	private static final int DATABASE_VERSION = 1;
-	//Table Names of Data Base.
-	static final String TABLE_Name1 = "tablename1";
-	static final String TABLE_Name2 = "tablename2";
-	static final String TABLE_Name3 = "tablename3";
-	static final String TABLE_Name4 = "tablename4";
+
 	public Context context;
 	static SQLiteDatabase sqliteDataBase;
 	
+	/**
+	 * Constructor for class
+	 * 
+	 * @param context - current state of application?
+	 */
 	public DataBaseHelper(Context context) {
 		super(context, DATABASE_NAME, null ,DATABASE_VERSION);
 		this.context = context;
 		DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
 	}
 	
+	/**
+	 * Method stub is just here because it is required.
+	 */
 	@Override
 	public void onCreate(SQLiteDatabase arg0) {
 	}
 	
+	/**
+	 * Method returns database.
+	 * 
+	 * @return
+	 * 		SQLiteDatabase - database used in application
+	 */
 	public SQLiteDatabase getDB() {
 		return sqliteDataBase;
 	}
-	//check if the database exists
+	
+	/**
+	 * Method creates database if it does not already exist.
+	 * 
+	 * @throws IOException
+	 */
 	public void createDataBase() throws IOException{
 			boolean databaseExist = checkDataBase();
 			databaseExist = false;
@@ -66,17 +82,28 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 					copyDataBase();
 				} catch(IOException e) {
 				}
-			}
-				//TODO Auto-generated catch block
-			
-	}// end if else dbExist
+			}		
+	}
 
-	//end createDataBase().
+	/**
+	 * Method checks proper location in android file system to see if 
+	 * database already exists.
+	 * 
+	 * @return
+	 * 		Boolean - true if database exists in proper location
+	 * 				  false otherwise
+	 */
 	public boolean checkDataBase(){
 		File databaseFile = new File(DB_PATH + DATABASE_NAME);
 		return databaseFile.exists();
 	}
 	
+	/**
+	 * Method copies database from assets folder in application to proper
+	 * location on android file system.
+	 *  
+	 * @throws IOException
+	 */
 	private void copyDataBase() throws IOException{
 		File database = context.getApplicationContext().getDatabasePath("databasename.db");
 
@@ -106,8 +133,10 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
 	/**
 	 * This method opens the data base connection.
-	 * First it create the path up till data base of the device.
+	 * First it creates the path up till data base of the device.
 	 * Then create connection with data base.
+	 * 
+	 * @throws SQLException
 	 */
 	public void openDataBase() throws SQLException{
 		//Open the database
@@ -131,11 +160,19 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 		super.close();
 	}
 
-	//declare methods to fetch data
+	/**
+	 * Method performs a query on the database, and returns the cursor.
+	 * 
+	 * @return
+	 * 		Cursor - object that makes queries easier to use
+	 */
 	public Cursor getBasicCategoryDetails(){
 		return sqliteDataBase.rawQuery( "write the query", null);
 	}
 
+	/**
+	 * Method needed in order to extend SQLiteOpenHelper
+	 */
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		//TODO Auto-generated method stub

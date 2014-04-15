@@ -8,8 +8,24 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+/**
+ * 
+ * @author Nick Wilson, Alisha Hayman
+ * 
+ * Class works with an xml file in order to load a webpage inside an
+ * application. 
+ *
+ */
 public class WebViewActivity extends Activity {
+	/* Basically a webpage object */
 	private WebView mWebView;
+	
+	/**
+	 * Method performs most of the work of this part of the application.
+	 * It overrides the default webview so that the application does not
+	 * call an external browser, and then loads and displays the url inside
+	 * the application.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,5 +52,4 @@ public class WebViewActivity extends Activity {
 		// Stop local links and redirects from opening in browser instead of WebView
 		mWebView.loadUrl(link);
 	}
-
 }

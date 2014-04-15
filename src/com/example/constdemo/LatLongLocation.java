@@ -12,17 +12,29 @@ import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * 
+ * @author Alisha Hayman, Nick Wilson
+ * @version 4.5.14
+ * 
+ * Class works with appropriate xml file to generate location "view" in
+ * application. It also uses gps to find current location of mobile device
+ * in latitude and longitude for future calculations.
+ */
 public class LatLongLocation extends Activity implements LocationListener {
 
+	/**
+	 * Method does most of the work for this particular view in application.
+	 * It calls the methods to get the coordinates and assigns these values
+	 * to the appropriate textviews for now.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
-		// The minimum distance to change Updates in meters
+		/* The minimum distance to change Updates in meters */
 	    final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
-	    // The minimum time between updates in milliseconds
+	    /* The minimum time between updates in milliseconds */
 	    final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
-		
 		
 		LocationManager locationManager;
 		Location location;
@@ -43,7 +55,6 @@ public class LatLongLocation extends Activity implements LocationListener {
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BW_UPDATES,
                 MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-        //Log.d("GPS Enabled", "GPS Enabled");
         if (locationManager != null) {
             location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             if (location != null) {
@@ -52,46 +63,27 @@ public class LatLongLocation extends Activity implements LocationListener {
                 lat.setText("Latitude: " + latitude);
                 lon.setText("Longitude: " + longitude);
                 time.setText("Time: " + now.toString());
-                //Toast.makeText(LatLongLocation.this, "latitude: " + latitude, Toast.LENGTH_LONG).show();
             }
         }
-		//longitude = locationmanage.getLongitude();
-		//latitude  = locationmanager.getLatitude();
-		
-		//Intent intent = getIntent();
-		//String[] myStrings = intent.getStringArrayExtra("time");
-		
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.location, menu);
-		return true;
-	}
-
+	
 	@Override
 	public void onLocationChanged(Location arg0) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void onProviderDisabled(String arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void onProviderEnabled(String arg0) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
 		// TODO Auto-generated method stub
-		
 	}
-
 }

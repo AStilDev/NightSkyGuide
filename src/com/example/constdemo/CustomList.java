@@ -8,6 +8,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * 
+ * @author Nick Wilson, Alisha Hayman
+ * @version 4.3.14
+ * 
+ * Class enables the use of custom lists with images embedded inside
+ * of them. 
+ *
+ */
 public class CustomList extends ArrayAdapter<String>{
 	private final Activity context;
 	private final String[] web;
