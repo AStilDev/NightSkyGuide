@@ -21,7 +21,7 @@ import android.util.Log;
  * This class is basically a hack that lets us load a premade sqlite
  * database into the the application. It came from this site.
  * http://www.reigndesign.com/blog/using-your-own-sqlite-database-in-android-applications/
- * @author Juan-Manuel Fluxà
+ * @author Juan-Manuel Flux
  * @modifications Nick Wilson, Alisha Hayman
  *
  */
