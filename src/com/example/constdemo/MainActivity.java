@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
             "Bootes",
             "Camelopardalis",
             "Cancer",
-            "Canes Venatici",  //cant add without having more pics as well or it crashes
+            "Canes Venatici",
             "Capricornius",
             "Cassiopeia",
             "Cygnus",
@@ -217,7 +217,8 @@ public class MainActivity extends Activity {
         int currentLat = (int) gps.getLatitude();
 
         if (currentLat >= 0) {
-            switch (currentLat % 10) {
+            min = (currentLat % 10) * 10;
+            /*switch (currentLat % 10) {
                 case 6:
                     min = 60;
                     break;
@@ -239,9 +240,10 @@ public class MainActivity extends Activity {
                 case 0:
                     min = 0;
                     break;
-            }
+            }*/
         } else {
-            switch (Math.abs(currentLat) % 10) {
+            min = (Math.abs(currentLat) % 10) * -10;
+            /*switch (Math.abs(currentLat) % 10) {
                 case 6:
                     min = -60;
                     break;
@@ -262,7 +264,7 @@ public class MainActivity extends Activity {
                     break;
                 default:
                     break;
-            }
+            }*/
         }
 
         return min;
