@@ -10,24 +10,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends Activity {
 
     ImageView img;
-    String[] dateTime = {};
     static String newConst = "Andromeda";
+    String realaddress = "default";
     String targetConst = "Andromeda";
-    // will add more of these later
     ListView list;
     String[] constList = {
             "Andromeda",
@@ -95,26 +93,44 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /******** button section ********************/
-        Button locationButton = (Button) findViewById(R.id.WebLink);
-        Button detailButton = (Button) findViewById(R.id.button2);
 
-        locationButton.setOnClickListener(new OnClickListener() {
+        // get previous intent
+        Intent intent = getIntent();
+        String addr = intent.getStringExtra("realaddress");
+        if (addr != null)
+        {
+            // get previous intents
+            realaddress = addr;
+            // TODO: DELETE
+            Toast toast = Toast.makeText(this.getApplicationContext(), realaddress, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+        /******** button section ********************/
+        img = (ImageView) findViewById(R.id.imageView1);
+        //Button locationButton = (Button) findViewById(R.id.WebLink);
+        ImageButton searchButton = (ImageButton) findViewById(R.id.button2);
+
+        img.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                ////////////// run gps and date functions store in array //////////
-
-                Intent intent = new Intent(MainActivity.this, LatLongLocation.class);
+                // when the image is clicked, go to details page
+                Intent intent = new Intent(MainActivity.this, DataBaseActivity.class);
+                intent.putExtra("selection", targetConst); //Optional parameters
                 startActivity(intent);
             }
         });
 
-        detailButton.setOnClickListener(new OnClickListener() {
+        // TODO:
+        searchButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // goto database activity with extra
-                Intent intent = new Intent(MainActivity.this, DataBaseActivity.class);
-                intent.putExtra("selection", targetConst); //Optional parameters
+                // relaunch page where address is from edittext
+                EditText address = (EditText) findViewById(R.id.editText);
+                String realaddress = address.getText().toString();
+                // TODO: Error check for invalid addresses!
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                intent.putExtra("realaddress", realaddress);
                 startActivity(intent);
             }
         });
@@ -132,7 +148,7 @@ public class MainActivity extends Activity {
         final String[] data = {"1", "2", "3", "4"};//myDbHelper.getConstInfo(value);
 
         // Query for
-        String simpleQuery = "SELECT * FROM location WHERE minLat=" + getMin()
+        String simpleQuery = "SELECT * FROM location WHERE minLat=" + getMin(realaddress)
                 + " AND vis_period LIKE " + getVisPer();
         Cursor cursor = db.rawQuery(simpleQuery, null);
 
@@ -217,10 +233,18 @@ public class MainActivity extends Activity {
      * latitude.
      * @return The new minimum latitude.
      */
-    private int getMin() {
+    private int getMin(String address) {
         // get current location
         int min = 99;
-        GPSTracker gps = new GPSTracker(this);
+        GPSTracker gps = null;
+        if (address.equals("default")){
+            gps = new GPSTracker(this);
+        }
+        else
+        {
+            // TODO:
+            gps = new GPSTracker(this, address);
+        }
         int currentLat = (int) gps.getLatitude();
 
         if (currentLat >= 0) {
@@ -230,7 +254,6 @@ public class MainActivity extends Activity {
             // negative latitude
             min = -1 * ((Math.abs(currentLat) % 100) - (Math.abs(currentLat) % 10));
         }
-
         return min;
     }
 
