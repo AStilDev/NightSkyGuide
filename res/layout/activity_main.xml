@@ -31,8 +31,7 @@
                 android:layout_weight="4"
                 android:id="@+id/editText" android:layout_marginRight="30dp"
                 android:background="#ffffff" android:layout_margin="10dp"
-                android:text="Enter an address"
-                android:selectAllOnFocus="true"/>
+                android:hint="Enter an address"/>
         <ImageButton
             	android:id="@+id/button2"
             	android:layout_width="0dp"
@@ -50,7 +49,7 @@
             android:layout_marginTop="0dp"
             android:layout_weight="3"
             android:contentDescription="@string/content"
-            android:src="@drawable/andromeda"
+            android:src="@drawable/none"
             android:alpha="0.9" android:clickable="true"/>
         
     	<ListView

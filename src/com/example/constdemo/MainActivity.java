@@ -17,12 +17,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.app.Activity;
 import android.content.Intent;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends Activity {
 
     ImageView img;
+    EditText address;
     static String newConst = "Andromeda";
     String realaddress = "default";
     String targetConst = "Andromeda";
@@ -97,13 +99,11 @@ public class MainActivity extends Activity {
         // get previous intent
         Intent intent = getIntent();
         String addr = intent.getStringExtra("realaddress");
-        if (addr != null)
-        {
+        if (addr != null) {
             // get previous intents
             realaddress = addr;
-            // TODO: DELETE
-            Toast toast = Toast.makeText(this.getApplicationContext(), realaddress, Toast.LENGTH_SHORT);
-            toast.show();
+            address = (EditText) findViewById(R.id.editText);
+            address.setHint(realaddress);
         }
 
         /******** button section ********************/
@@ -121,14 +121,12 @@ public class MainActivity extends Activity {
             }
         });
 
-        // TODO:
         searchButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 // relaunch page where address is from edittext
-                EditText address = (EditText) findViewById(R.id.editText);
+                address = (EditText) findViewById(R.id.editText);
                 String realaddress = address.getText().toString();
-                // TODO: Error check for invalid addresses!
                 Intent intent = new Intent(MainActivity.this, MainActivity.class);
                 intent.putExtra("realaddress", realaddress);
                 startActivity(intent);
@@ -152,15 +150,14 @@ public class MainActivity extends Activity {
                 + " AND vis_period LIKE " + getVisPer();
         Cursor cursor = db.rawQuery(simpleQuery, null);
 
-        // TODO: array of constellations to display in list
+        // array of constellations to display in list
         ArrayList<String> constsAtLoc = new ArrayList<String>();
         // array of Integers representing drawable ids for given constellations
         ArrayList<Integer> imagesAtLoc = new ArrayList<Integer>();
 
         int count = 0;
 
-        if (cursor.moveToFirst())
-        {
+        if (cursor.moveToFirst()) {
             do {
                 data[0] = cursor.getString(0); // minLat
                 data[1] = cursor.getString(1); // maxLat
@@ -168,9 +165,6 @@ public class MainActivity extends Activity {
                 data[3] = cursor.getString(3); // visibility period
                 //data[4] = cursor.getString(4); // visibility_period
 
-                // TODO: DELETE
-                Toast toast = Toast.makeText(this.getApplicationContext(), data[2], Toast.LENGTH_SHORT);
-                toast.show();
                 constsAtLoc.add(data[2]); // add constellation name at cursor
 
                 // get image drawable of this constellation by finding id
@@ -188,61 +182,61 @@ public class MainActivity extends Activity {
 
         /********** end database section ***********/
 
-        final String[] constsAtLocArray = constsAtLoc.toArray(new String[constsAtLoc.size()]);
-        final Integer[] imagesAtLocArray = imagesAtLoc.toArray(new Integer[imagesAtLoc.size()]);
+        if (constsAtLoc.size() > 0) {
+            final String[] constsAtLocArray = constsAtLoc.toArray(new String[constsAtLoc.size()]);
+            final Integer[] imagesAtLocArray = imagesAtLoc.toArray(new Integer[imagesAtLoc.size()]);
 
-        img = (ImageView) findViewById(R.id.imageView1);
+            img = (ImageView) findViewById(R.id.imageView1);
 
-        // update targetConst and newConst
-        targetConst = constsAtLocArray[0];
-        newConst = constsAtLocArray[0].replaceAll(" ", "_").toLowerCase();
+            // update targetConst and newConst
+            targetConst = constsAtLocArray[0];
+            newConst = constsAtLocArray[0].replaceAll(" ", "_").toLowerCase();
 
-        int imageNum = getResources().getIdentifier(newConst, "drawable", getPackageName());
+            int imageNum = getResources().getIdentifier(newConst, "drawable", getPackageName());
 
-        img.setAlpha(170); //value: [0-255]. Where 0 is fully transparent and 255 is fully opaque
-        img.setImageResource(imageNum);
+            img.setAlpha(170); //value: [0-255]. Where 0 is fully transparent and 255 is fully opaque
+            img.setImageResource(imageNum);
 
-        // inserting constellations and images at a given location
-        //final String[] constsAtLocArray = constsAtLoc.toArray(new String[constsAtLoc.size()]);
-        //final Integer[] imagesAtLocArray = imagesAtLoc.toArray(new Integer[imagesAtLoc.size()]);
+            // inserting constellations and images at a given location
+            //final String[] constsAtLocArray = constsAtLoc.toArray(new String[constsAtLoc.size()]);
+            //final Integer[] imagesAtLocArray = imagesAtLoc.toArray(new Integer[imagesAtLoc.size()]);
 
-        CustomList adapter = new CustomList(MainActivity.this,
-                constsAtLocArray, imagesAtLocArray);
-        list = (ListView) findViewById(R.id.listView1);
-        list.setAdapter(adapter);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @SuppressWarnings("deprecation")
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                // set up things to refresh with new information(selected image displayed
-                targetConst = constsAtLocArray[+position];
-                newConst = constsAtLocArray[+position].replaceAll(" ", "_").toLowerCase();
+            CustomList adapter = new CustomList(MainActivity.this,
+                    constsAtLocArray, imagesAtLocArray);
+            list = (ListView) findViewById(R.id.listView1);
+            list.setAdapter(adapter);
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @SuppressWarnings("deprecation")
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    // set up things to refresh with new information(selected image displayed
+                    targetConst = constsAtLocArray[+position];
+                    newConst = constsAtLocArray[+position].replaceAll(" ", "_").toLowerCase();
 
-                // redisplay image
-                img = (ImageView) findViewById(R.id.imageView1);
-                int imageId = getResources().getIdentifier(newConst, "drawable", getPackageName());
-                img.setAlpha(170); //value: [0-255]. Where 0 is fully transparent and 255 is fully opaque
-                img.setImageResource(imageId);
-            }
-        });
+                    // redisplay image
+                    img = (ImageView) findViewById(R.id.imageView1);
+                    int imageId = getResources().getIdentifier(newConst, "drawable", getPackageName());
+                    img.setAlpha(170); //value: [0-255]. Where 0 is fully transparent and 255 is fully opaque
+                    img.setImageResource(imageId);
+                }
+            });
+        }
     }
 
     /**
      * Helper method returns the minimum latitude representation of a given
      * latitude.
+     *
      * @return The new minimum latitude.
      */
     private int getMin(String address) {
         // get current location
         int min = 99;
         GPSTracker gps = null;
-        if (address.equals("default")){
+        if (address.equals("default")) {
             gps = new GPSTracker(this);
-        }
-        else
-        {
-            // TODO:
+        } else {
             gps = new GPSTracker(this, address);
         }
         int currentLat = (int) gps.getLatitude();
@@ -260,8 +254,9 @@ public class MainActivity extends Activity {
     /**
      * Helper method gets the current visibility period as a month from the
      * calendar.
+     *
      * @return A String representation of the current month to be used in an
-     *         SQL query.
+     * SQL query.
      */
     private String getVisPer() {
         // find current date (month, precisely)
