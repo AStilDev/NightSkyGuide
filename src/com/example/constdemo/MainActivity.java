@@ -146,7 +146,6 @@ public class MainActivity extends Activity {
         if (cursor.moveToFirst())
         {
             do {
-                // TODO: Works? Out of memory at constsAtLoc.add?
                 data[0] = cursor.getString(0); // minLat
                 data[1] = cursor.getString(1); // maxLat
                 data[2] = cursor.getString(2); // constellation
@@ -170,51 +169,26 @@ public class MainActivity extends Activity {
                 count++;
             } while (cursor.moveToNext());
         }
-        /*cursor.moveToFirst();
-        while (cursor != null) {
-            data[0] = cursor.getString(0); // minLat
-            data[1] = cursor.getString(1); // maxLat
-            data[2] = cursor.getString(2); // constellation
-            data[3] = cursor.getString(3); // visibility period
-            //data[4] = cursor.getString(4); // visibility_period
-
-            constsAtLoc.add(data[2]); // add constellation name at cursor
-
-            // get image drawable of this constellation by finding id
-            int i = 0;
-            while (!constsAtLoc.get(count).equals(constList[i]) && i < constList.length - 1) {
-                i++;
-            }
-
-            // get drawable at index i, put in new image array
-            imagesAtLoc.add(imageId[i]);
-
-            count++;
-            cursor.moveToNext();
-
-        }*/
 
         /********** end database section ***********/
 
+        final String[] constsAtLocArray = constsAtLoc.toArray(new String[constsAtLoc.size()]);
+        final Integer[] imagesAtLocArray = imagesAtLoc.toArray(new Integer[imagesAtLoc.size()]);
+
         img = (ImageView) findViewById(R.id.imageView1);
 
-        // TODO: update targetConst and newConst
-        targetConst = constsAtLoc.get(0);
-        newConst = constsAtLoc.get(0);
+        // update targetConst and newConst
+        targetConst = constsAtLocArray[0];
+        newConst = constsAtLocArray[0].replaceAll(" ", "_").toLowerCase();
 
         int imageNum = getResources().getIdentifier(newConst, "drawable", getPackageName());
 
         img.setAlpha(170); //value: [0-255]. Where 0 is fully transparent and 255 is fully opaque
         img.setImageResource(imageNum);
 
-
-        //CustomList adapter = new CustomList(MainActivity.this, constList, imageId);
-
-        // TODO: inserting constellations and images at a given location
-        //final String[] constsAtLocArray = (String[]) constsAtLoc.toArray();
-        final String[] constsAtLocArray = constsAtLoc.toArray(new String[constsAtLoc.size()]);
-        //final Integer[] imagesAtLocArray = (Integer[]) imagesAtLoc.toArray();
-        final Integer[] imagesAtLocArray = imagesAtLoc.toArray(new Integer[imagesAtLoc.size()]);
+        // inserting constellations and images at a given location
+        //final String[] constsAtLocArray = constsAtLoc.toArray(new String[constsAtLoc.size()]);
+        //final Integer[] imagesAtLocArray = imagesAtLoc.toArray(new Integer[imagesAtLoc.size()]);
 
         CustomList adapter = new CustomList(MainActivity.this,
                 constsAtLocArray, imagesAtLocArray);
@@ -226,9 +200,7 @@ public class MainActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // set up things to refresh with new information(selected image displayed
-                // TODO: targetConst = constList[+position]; // update this for call to database in view
                 targetConst = constsAtLocArray[+position];
-                // TODO: newConst = constList[+position].replaceAll(" ", "_").toLowerCase();
                 newConst = constsAtLocArray[+position].replaceAll(" ", "_").toLowerCase();
 
                 // redisplay image
@@ -240,6 +212,11 @@ public class MainActivity extends Activity {
         });
     }
 
+    /**
+     * Helper method returns the minimum latitude representation of a given
+     * latitude.
+     * @return The new minimum latitude.
+     */
     private int getMin() {
         // get current location
         int min = 99;
@@ -257,6 +234,12 @@ public class MainActivity extends Activity {
         return min;
     }
 
+    /**
+     * Helper method gets the current visibility period as a month from the
+     * calendar.
+     * @return A String representation of the current month to be used in an
+     *         SQL query.
+     */
     private String getVisPer() {
         // find current date (month, precisely)
         // return '%,12,%' String format
@@ -268,6 +251,7 @@ public class MainActivity extends Activity {
         if (month > 12)
             month = 1;
 
+        // format to be used as LIKE action in SQL query
         return "\'%," + month + ",%\'"; //",%\'";
     }
 }
