@@ -245,17 +245,13 @@ public class MainActivity extends Activity {
         int min = 99;
         GPSTracker gps = new GPSTracker(this);
         int currentLat = (int) gps.getLatitude();
-        // TODO: DELETE
-        Toast toast = Toast.makeText(this.getApplicationContext(), "Current Lat: " + currentLat, Toast.LENGTH_SHORT);
-        toast.show();
 
         if (currentLat >= 0) {
-            min = (currentLat % 10) * 10;
-            // TODO: DELETE
-            toast = Toast.makeText(this.getApplicationContext(), "Min Lat: " + min, Toast.LENGTH_SHORT);
-            toast.show();
+            // positive latitude
+            min = ((currentLat % 100) - (currentLat % 10));
         } else {
-            min = (Math.abs(currentLat) % 10) * -10;
+            // negative latitude
+            min = -1 * ((Math.abs(currentLat) % 100) - (Math.abs(currentLat) % 10));
         }
 
         return min;

@@ -7,6 +7,12 @@ import android.os.Bundle;
 import android.text.format.Time;
 import android.view.Menu;
 import android.widget.TextView;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+
+
+import java.util.List;
+import java.util.Locale;
 
 
 public class GPSTracker implements LocationListener {
@@ -16,8 +22,14 @@ public class GPSTracker implements LocationListener {
     double longitude;
     double latitude;
 
+    /**
+     * Constructor gets the current lat and long from GPS.
+     * (Be sure to load GPS for a few minutes before using.)
+     * @param context The current context.
+     */
     public GPSTracker(Context context) {
         // TODO: Trying to get this to work
+        // TODO: TAKES FOREVER
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000L,
         //        500.0f, this);
@@ -28,21 +40,31 @@ public class GPSTracker implements LocationListener {
             longitude = location.getLongitude();
         }
 
-
-        /*if (locationManager != null) {
-            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (location != null) {
-                latitude = location.getLatitude();
-                longitude = location.getLongitude();
-                //Toast.makeText(LatLongLocation.this, "latitude: " + latitude, Toast.LENGTH_LONG).show();
-            }
-        }*/
     }
-    //longitude = locationmanage.getLongitude();
-    //latitude  = locationmanager.getLatitude();
 
-    //Intent intent = getIntent();
-    //String[] myStrings = intent.getStringArrayExtra("time");}
+    /**
+     * Constructor that gets the lat and long from an address.
+     * Address must be "street, city, state.
+     * @param context Current context.
+     * @param address A given address as a String.
+     */
+    public GPSTracker(Context context, String address)
+    {
+        Geocoder geoCoder = new Geocoder(context, Locale.getDefault());
+        try
+        {
+            List<Address> addresses = geoCoder.getFromLocationName(address , 1);
+            if (addresses.size() > 0)
+            {
+                latitude = addresses.get(0).getLatitude();
+                longitude = addresses.get(0).getLongitude();
+            }
+        }
+        catch(Exception ee)
+        {
+            ee.printStackTrace();
+        }
+    }
 
     public double getLatitude() {
         return latitude;

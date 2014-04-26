@@ -16,6 +16,16 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 10 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="google-play-services_lib1" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/adt-bundle-linux-x86_64-20130917/sdk/extras/google/google_play_services/libproject/google-play-services_lib/libs/google-play-services.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 
