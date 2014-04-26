@@ -133,7 +133,7 @@ public class MainActivity extends Activity {
 
         // Query for
         String simpleQuery = "SELECT * FROM location WHERE minLat=" + getMin()
-                + " AND visibility_period LIKE " + getVisPer();
+                + " AND vis_period LIKE " + getVisPer();
         Cursor cursor = db.rawQuery(simpleQuery, null);
 
         // TODO: array of constellations to display in list
@@ -277,7 +277,8 @@ public class MainActivity extends Activity {
         // get the current month (numeric)
         Calendar c = Calendar.getInstance();
         int month = c.get(Calendar.MONTH);
+        month++;
 
-        return "\'%," + month + ",%\'";
+        return "\'%," + month + "%\'"; //",%\'";
     }
 }
