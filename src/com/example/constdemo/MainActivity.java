@@ -129,7 +129,7 @@ public class MainActivity extends Activity {
         myDbHelper.openDataBase();
         SQLiteDatabase db = myDbHelper.getDB();
 
-        final String[] data = {"1", "2", "3", "4", "5"};//myDbHelper.getConstInfo(value);
+        final String[] data = {"1", "2", "3", "4"};//myDbHelper.getConstInfo(value);
 
         // Query for
         String simpleQuery = "SELECT * FROM location WHERE minLat=" + getMin()
@@ -142,29 +142,58 @@ public class MainActivity extends Activity {
         ArrayList<Integer> imagesAtLoc = new ArrayList<Integer>();
 
         int count = 0;
-        while (cursor != null) {
-            cursor.moveToFirst();
 
+        if (cursor.moveToFirst())
+        {
+            do {
+                // TODO: Works? Out of memory at constsAtLoc.add?
+                data[0] = cursor.getString(0); // minLat
+                data[1] = cursor.getString(1); // maxLat
+                data[2] = cursor.getString(2); // constellation
+                data[3] = cursor.getString(3); // visibility period
+                //data[4] = cursor.getString(4); // visibility_period
+
+                // TODO:
+                Toast toast = Toast.makeText(this.getApplicationContext(), data[2], Toast.LENGTH_SHORT);
+                toast.show();
+
+                constsAtLoc.add(data[2]); // add constellation name at cursor
+
+                // get image drawable of this constellation by finding id
+                int i = 0;
+                while (!constsAtLoc.get(count).equals(constList[i]) && i < constList.length - 1) {
+                    i++;
+                }
+
+                // get drawable at index i, put in new image array
+                imagesAtLoc.add(imageId[i]);
+
+                count++;
+            } while (cursor.moveToNext());
+        }
+        /*cursor.moveToFirst();
+        while (cursor != null) {
             data[0] = cursor.getString(0); // minLat
             data[1] = cursor.getString(1); // maxLat
             data[2] = cursor.getString(2); // constellation
             data[3] = cursor.getString(3); // visibility period
             //data[4] = cursor.getString(4); // visibility_period
 
-            constsAtLoc.add(data[3]); // add constellation name at cursor
+            constsAtLoc.add(data[2]); // add constellation name at cursor
 
             // get image drawable of this constellation by finding id
             int i = 0;
-            while (!constsAtLoc.get(count).equals(constList[i])) {
+            while (!constsAtLoc.get(count).equals(constList[i]) && i < constList.length - 1) {
                 i++;
             }
 
             // get drawable at index i, put in new image array
-            imagesAtLoc.set(count, imageId[i]);
+            imagesAtLoc.add(imageId[i]);
 
             count++;
+            cursor.moveToNext();
 
-        }
+        }*/
 
         /********** end database section ***********/
 
@@ -181,9 +210,12 @@ public class MainActivity extends Activity {
 
 
         //CustomList adapter = new CustomList(MainActivity.this, constList, imageId);
+
         // TODO: inserting constellations and images at a given location
-        final String[] constsAtLocArray = (String[]) constsAtLoc.toArray();
-        final Integer[] imagesAtLocArray = (Integer[]) imagesAtLoc.toArray();
+        //final String[] constsAtLocArray = (String[]) constsAtLoc.toArray();
+        final String[] constsAtLocArray = constsAtLoc.toArray(new String[constsAtLoc.size()]);
+        //final Integer[] imagesAtLocArray = (Integer[]) imagesAtLoc.toArray();
+        final Integer[] imagesAtLocArray = imagesAtLoc.toArray(new Integer[imagesAtLoc.size()]);
 
         CustomList adapter = new CustomList(MainActivity.this,
                 constsAtLocArray, imagesAtLocArray);
