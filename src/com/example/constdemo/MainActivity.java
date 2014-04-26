@@ -145,11 +145,11 @@ public class MainActivity extends Activity {
         while (cursor != null) {
             cursor.moveToFirst();
 
-            data[0] = cursor.getString(0); // _id
-            data[1] = cursor.getString(1); // minLat
-            data[2] = cursor.getString(2); // maxLat
-            data[3] = cursor.getString(3); // constellation
-            data[4] = cursor.getString(4); // visibility_period
+            data[0] = cursor.getString(0); // minLat
+            data[1] = cursor.getString(1); // maxLat
+            data[2] = cursor.getString(2); // constellation
+            data[3] = cursor.getString(3); // visibility period
+            //data[4] = cursor.getString(4); // visibility_period
 
             constsAtLoc.add(data[3]); // add constellation name at cursor
 
