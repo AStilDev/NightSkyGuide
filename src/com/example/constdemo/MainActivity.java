@@ -153,10 +153,9 @@ public class MainActivity extends Activity {
                 data[3] = cursor.getString(3); // visibility period
                 //data[4] = cursor.getString(4); // visibility_period
 
-                // TODO:
+                // TODO: DELETE
                 Toast toast = Toast.makeText(this.getApplicationContext(), data[2], Toast.LENGTH_SHORT);
                 toast.show();
-
                 constsAtLoc.add(data[2]); // add constellation name at cursor
 
                 // get image drawable of this constellation by finding id
@@ -242,61 +241,21 @@ public class MainActivity extends Activity {
     }
 
     private int getMin() {
-        // 60, 70, etc?
         // get current location
         int min = 99;
         GPSTracker gps = new GPSTracker(this);
         int currentLat = (int) gps.getLatitude();
+        // TODO: DELETE
+        Toast toast = Toast.makeText(this.getApplicationContext(), "Current Lat: " + currentLat, Toast.LENGTH_SHORT);
+        toast.show();
 
         if (currentLat >= 0) {
             min = (currentLat % 10) * 10;
-            /*switch (currentLat % 10) {
-                case 6:
-                    min = 60;
-                    break;
-                case 5:
-                    min = 50;
-                    break;
-                case 4:
-                    min = 40;
-                    break;
-                case 3:
-                    min = 30;
-                    break;
-                case 2:
-                    min = 20;
-                    break;
-                case 1:
-                    min = 10;
-                    break;
-                case 0:
-                    min = 0;
-                    break;
-            }*/
+            // TODO: DELETE
+            toast = Toast.makeText(this.getApplicationContext(), "Min Lat: " + min, Toast.LENGTH_SHORT);
+            toast.show();
         } else {
             min = (Math.abs(currentLat) % 10) * -10;
-            /*switch (Math.abs(currentLat) % 10) {
-                case 6:
-                    min = -60;
-                    break;
-                case 5:
-                    min = -50;
-                    break;
-                case 4:
-                    min = -40;
-                    break;
-                case 3:
-                    min = -30;
-                    break;
-                case 2:
-                    min = -20;
-                    break;
-                case 1:
-                    min = -10;
-                    break;
-                default:
-                    break;
-            }*/
         }
 
         return min;
@@ -310,7 +269,9 @@ public class MainActivity extends Activity {
         Calendar c = Calendar.getInstance();
         int month = c.get(Calendar.MONTH);
         month++;
+        if (month > 12)
+            month = 1;
 
-        return "\'%," + month + "%\'"; //",%\'";
+        return "\'%," + month + ",%\'"; //",%\'";
     }
 }
