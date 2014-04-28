@@ -41,26 +41,57 @@ public class Location {
 
     public String getVis_period() { return vis_period; }
 
+    /**
+     * Method sets the id field.
+     * 
+     * @param
+     * 	data - int, the new value for the id
+     */ 
     public void setId(int data)
     {
         id = data;
     }
 
+    /**
+     * Method sets the minimum latitude.
+     * 
+     * @param
+     * 	min - int, the new value for the minimum latitude
+     */
     public void setMinLat(int min)
     {
         minLat = min;
     }
 
+    /**
+     * Method sets the maximum latitude.
+     * 
+     * @param
+     * 	max - int, the new value for the maximum latitude
+     */
     public void setMaxLat(int max)
     {
         maxLat = max;
     }
 
+    /**
+     * Method sets the constellation field.
+     * 
+     * @param
+     * 	constel - String, constellation that the constellation field will be
+     * 			  set too
+     */
     public void setConstellation(String constel)
     {
         constellation = constel;
     }
 
+    /**
+     * Method
+     * 
+     * @param
+     * 	vis - String,
+     */
     public void setVis_period(String vis)
     {
         vis_period = vis;

@@ -25,6 +25,10 @@ public class WebViewActivity extends Activity {
 	 * It overrides the default webview so that the application does not
 	 * call an external browser, and then loads and displays the url inside
 	 * the application.
+	 * 
+	 * @param
+	 * 	savedInstanceState - Bundle, like a wrapper class that is used to pass
+	 * 						 data between activities
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

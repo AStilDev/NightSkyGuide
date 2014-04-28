@@ -14,6 +14,13 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * @author Alisha Hayman, Nick Wilson
+ * @version 4.24.14
+ * 
+ * Class helps provide functionallity for gps location, and determine the
+ * device's current location in latitude longitude coordinates.
+ */
 
 public class GPSTracker implements LocationListener {
 

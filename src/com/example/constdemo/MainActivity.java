@@ -21,8 +21,15 @@ import android.content.Intent;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+ * @author Nick Wilson, Alisha Hayman
+ * @version 4.10.14
+ * 
+ * Class provides entry point into application, it displays the first page
+ * including a list of constellations and image of the currently selected
+ * one.
+ */
 public class MainActivity extends Activity {
-
     ImageView img;
     EditText address;
     static String newConst = "Andromeda";
@@ -30,71 +37,32 @@ public class MainActivity extends Activity {
     String targetConst = "Andromeda";
     ListView list;
     String[] constList = {
-            "Andromeda",
-            "Aquarius",
-            "Aquila",
-            "Aries",
-            "Bootes",
-            "Camelopardalis",
-            "Cancer",
-            "Canes Venatici",
-            "Capricornius",
-            "Cassiopeia",
-            "Cygnus",
-            "Delphinius",
-            "Draco",
-            "Gemini",
-            "Hercules",
-            "Leo Minor",
-            "Leo",
-            "Libra",
-            "Lynx",
-            "Orion",
-            "Pegasus",
-            "Perseus",
-            "Pisces",
-            "Sagittarius",
-            "Scorpius",
+            "Andromeda", "Aquarius", "Aquila", "Aries", "Bootes",
+            "Camelopardalis", "Cancer", "Canes Venatici", "Capricornius",
+            "Cassiopeia", "Cygnus", "Delphinius", "Draco", "Gemini",
+            "Hercules", "Leo Minor", "Leo", "Libra", "Lynx", "Orion",
+            "Pegasus", "Perseus", "Pisces", "Sagittarius", "Scorpius",
             "Taurus"
     };
 
     // will add more of these later
     Integer[] imageId = {
-            R.drawable.andromeda,
-            R.drawable.aquarius,
-            R.drawable.aquila,
-            R.drawable.aries,
-            R.drawable.bootes,
-            R.drawable.camelopardalis,
-            R.drawable.cancer,
-            R.drawable.canes_venatici,
-            R.drawable.capricornius,
-            R.drawable.cassiopeia,
-            R.drawable.cygnus,
-            R.drawable.delphinius,
-            R.drawable.draco,
-            R.drawable.gemini,
-            R.drawable.hercules,
-            R.drawable.leo_minor,
-            R.drawable.leo,
-            R.drawable.libra,
-            R.drawable.lynx,
-            R.drawable.orion,
-            R.drawable.pegasus,
-            R.drawable.perseus,
-            R.drawable.pisces,
-            R.drawable.sagittarius,
-            R.drawable.scorpius,
-            R.drawable.taurus
+            R.drawable.andromeda, R.drawable.aquarius, R.drawable.aquila,
+            R.drawable.aries, R.drawable.bootes, R.drawable.camelopardalis,
+            R.drawable.cancer, R.drawable.canes_venatici, 
+            R.drawable.capricornius, R.drawable.cassiopeia, R.drawable.cygnus,
+            R.drawable.delphinius, R.drawable.draco, R.drawable.gemini,
+            R.drawable.hercules, R.drawable.leo_minor, R.drawable.leo,
+            R.drawable.libra, R.drawable.lynx, R.drawable.orion,
+            R.drawable.pegasus, R.drawable.perseus, R.drawable.pisces,
+            R.drawable.sagittarius, R.drawable.scorpius, R.drawable.taurus
     };
 
     @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         // get previous intent
         Intent intent = getIntent();
@@ -110,7 +78,6 @@ public class MainActivity extends Activity {
         img = (ImageView) findViewById(R.id.imageView1);
         //Button locationButton = (Button) findViewById(R.id.WebLink);
         ImageButton searchButton = (ImageButton) findViewById(R.id.button2);
-
         img.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,11 +99,9 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
-
         /********** end of button section ***********/
 
         /********** begin database section **********/
-
         DataBaseHelper myDbHelper;
         myDbHelper = new DataBaseHelper(this);
 
@@ -179,7 +144,6 @@ public class MainActivity extends Activity {
                 count++;
             } while (cursor.moveToNext());
         }
-
         /********** end database section ***********/
 
         if (constsAtLoc.size() > 0) {
@@ -228,6 +192,9 @@ public class MainActivity extends Activity {
      * Helper method returns the minimum latitude representation of a given
      * latitude.
      *
+     * @param
+     * 	address - String, location
+     * 
      * @return The new minimum latitude.
      */
     private int getMin(String address) {

@@ -1,17 +1,6 @@
 package com.example.constdemo;
 
-/**
- * @author Nick Wilson, Alisha Hayman
- * 
- * Class works in conjunction with the appropriate xml file to 
- * generate a view for displaying more detailed information about
- * a specified Constellation it received as an intent.  It grabs data
- * through a query to the database and puts this data in the proper 
- * place for the xml file to display it on the phone's screen.
- */
-
 import java.io.IOException;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -25,8 +14,28 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * @author Nick Wilson, Alisha Hayman
+ * 
+ * Class works in conjunction with the appropriate xml file to 
+ * generate a view for displaying more detailed information about
+ * a specified Constellation it received as an intent.  It grabs data
+ * through a query to the database and puts this data in the proper 
+ * place for the xml file to display it on the phone's screen.
+ */
+
 public class DataBaseActivity extends Activity {
 
+	/**
+	 * Method is called when this activity is created, it makes the call to copy
+	 * the database in to the proper location in the Android file system. It then
+	 * performs a simple query to get the basic information about the selected
+	 * constellation.
+	 * 
+	 * @param
+	 * 	savedInstanceState - Bundle, which is like a wrapper that is used to
+	 * 						 pass data between activities
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

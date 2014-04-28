@@ -18,17 +18,40 @@ import android.widget.TextView;
  *
  */
 public class CustomList extends ArrayAdapter<String>{
+	/* Current activity */
 	private final Activity context;
+	
+	/* Names of constellations in an array */
 	private final String[] web;
+	
+	/* id numbers for images */
 	private final Integer[] imageId;
 
-
+	/**
+	 * Constructor it initializes the fields of the class.
+	 * 
+	 * @param
+	 * 	context - Activity type, the current activity
+	 * 	web		- an array of names for the constellations
+	 *  imageId - an array of Integers representing the ids of the images
+	 */
 	public CustomList(Activity context,	String[] web, Integer[] imageId) {
 		super(context, R.layout.list_single, web);
 		this.context = context;
 		this.web = web;
 		this.imageId = imageId;
 	}
+	
+	/**
+	 * Method gets and returns a View object.
+	 * @param
+	 * 	position  - int that is position on the list
+	 * 	view	  - View, current view
+	 *  parent	  - ViewGroup
+	 *  
+	 * @return
+	 * 	View - the view that app will go to
+	 */
 	@Override
 	public View getView(int position, View view, ViewGroup parent) {
 		LayoutInflater inflater = context.getLayoutInflater();
