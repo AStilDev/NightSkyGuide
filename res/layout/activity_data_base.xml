@@ -28,28 +28,16 @@
     
     <!-- wikilink -->
 
-	<TextView
-	    android:id="@+id/constLink"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:autoLink="web"
-	    android:layout_alignLeft="@+id/constName"
-	    android:layout_below="@+id/constName"
-	    android:layout_marginTop="34dp"
-	    android:textSize="22sp"
-	    android:text="@string/hello_world"
-	    android:textColor="@color/light_blue" />
-
-	<TextView
+    <TextView
 	    android:id="@+id/constStar"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignLeft="@+id/constLink"
-	    android:layout_below="@+id/constLink"
-	    android:layout_marginTop="30dp"
+        android:layout_marginTop="30dp"
 	    android:textSize="22sp"
 	    android:text="@string/hello_world"
-	    android:textColor="@color/light_blue" />
+	    android:textColor="@color/light_blue"
+        android:layout_alignLeft="@+id/constName"
+        android:layout_below="@+id/constName"/>
 
 	<TextView
 	    android:id="@+id/constFamily"
@@ -88,8 +76,8 @@
 	    android:id="@+id/WebLink"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_below="@+id/constAbb"
-	    android:layout_centerHorizontal="true"
-	    android:text="Wikipedia" />
+        android:text="Wikipedia" android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"/>
 
 </RelativeLayout>

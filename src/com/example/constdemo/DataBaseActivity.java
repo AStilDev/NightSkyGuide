@@ -109,8 +109,8 @@ public class DataBaseActivity extends Activity {
 	protected void setDataToText(String[] data) {
 		TextView text = (TextView) findViewById(R.id.constName);
 	    text.setText("Constellation name: " + data[1]);
-	    TextView text1 = (TextView) findViewById(R.id.constLink);
-	    text1.setText("Wikipedia Link: " + data[6]);
+	    //TextView text1 = (TextView) findViewById(R.id.constLink);
+	    //text1.setText("Wikipedia Link: " + data[6]);
 	    TextView text2 = (TextView) findViewById(R.id.constStar);
 	    text2.setText("Closest star and distance(ly): " +data[5]);
 	    TextView text3 = (TextView) findViewById(R.id.constFamily);
